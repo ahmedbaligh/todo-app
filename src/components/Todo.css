@@ -1,0 +1,43 @@
+.todo {
+  font: 400 18px 'Josefin Sans', sans-serif;
+  position: absolute;
+  top: 65px;
+  left: 31%;
+  width: 39%;
+
+  border: 2px solid #000;
+}
+
+.todo-item {
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  border-radius: 4px;
+}
+
+.todo-check {
+  transition: 0.2s ease-out;
+  width: 26px;
+  height: 26px;
+  border: 1px solid;
+  border-radius: 50%;
+  margin-right: 25px;
+}
+
+.todo-check:hover {
+  cursor: pointer;
+}
+
+.todo-text {
+  transition: 0.2s ease-in-out !important;
+  font: inherit !important;
+  font-size: 20px !important;
+  --placeholder-color: hsl(236, 9%, 61%);
+}
+
+::placeholder {
+  text-decoration: none;
+  color: var(--placeholder-color) !important;
+  /* opacity: 1; */
+}
