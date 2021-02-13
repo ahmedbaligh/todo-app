@@ -2,6 +2,7 @@ import React from 'react';
 import TodoHeader from './TodoHeader';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
+import TodoControls from './TodoControls';
 import './Todo.css';
 
 const defaultTodos = [
@@ -38,7 +39,24 @@ const defaultTodos = [
 ];
 
 class Todo extends React.Component {
-  state = { todos: defaultTodos };
+  state = {
+    todos: defaultTodos,
+    filter: 'all'
+  };
+
+  filteredTodos = () => {
+    const { todos, filter } = this.state;
+
+    if (filter === 'active') return todos.filter(todo => !todo.completed);
+
+    if (filter === 'completed') return todos.filter(todo => todo.completed);
+
+    return todos;
+  };
+
+  onFilterChange = filter => this.setState({ filter });
+
+  todosLeft = () => this.state.todos.filter(todo => !todo.completed).length;
 
   onTodoChange = ({ id, text, completed }) =>
     this.setState({
@@ -64,9 +82,13 @@ class Todo extends React.Component {
       todos: prevState.todos.filter(todo => todo.id !== id)
     }));
 
+  onClearCompleted = () =>
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => !todo.completed)
+    }));
+
   render() {
     const { darkTheme, theme, onThemeChange } = this.props;
-    console.log(this.state.todos);
 
     return (
       <main className="todo">
@@ -74,9 +96,14 @@ class Todo extends React.Component {
         <AddTodo theme={theme} onNewTodo={this.onNewTodo} />
         <TodoList
           theme={theme}
-          todos={this.state.todos}
+          todos={this.filteredTodos()}
           onTodoChange={this.onTodoChange}
           onTodoDelete={this.onTodoDelete}
+        />
+        <TodoControls
+          todosLeft={this.todosLeft()}
+          onFilter={this.onFilterChange}
+          onClearCompleted={this.onClearCompleted}
         />
         <p className="todo-info" style={{ color: theme.info }}>
           Drag and drop to reorder list
