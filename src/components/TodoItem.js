@@ -17,24 +17,24 @@ const TodoItem = ({
   const checkRef = useRef();
 
   useEffect(() => {
-    const timeoutID = setTimeout(() => setDebouncedText(text), 1500);
-
-    return () => clearTimeout(timeoutID);
-  }, [text]);
-
-  useEffect(() => {
-    textRef.current.style.setProperty(
-      '--placeholder-color',
-      theme.todo.placeholder
+    const timeoutID = setTimeout(
+      () => (text ? setDebouncedText(text) : setText(debouncedText)),
+      3000
     );
 
-    let checkStyles, textStyles;
+    return () => clearTimeout(timeoutID);
+  }, [text, debouncedText]);
+
+  useEffect(() => {
+    let checkStyles, textStyles, checkBackground;
 
     if (completed) {
+      checkBackground = 'transparent';
+
       checkStyles = {
         background:
           'url(/images/icon-check.svg) no-repeat center / 47% 47%, linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))',
-        borderColor: theme.check.borderCompleted
+        border: 'none'
       };
 
       textStyles = {
@@ -42,16 +42,23 @@ const TodoItem = ({
         color: theme.todo.fontCompleted
       };
     } else {
-      checkStyles = {
-        background: 'transparent',
-        borderColor: theme.check.border
-      };
+      checkBackground = theme.background;
 
+      checkStyles = {
+        background: '',
+        border: `1px solid ${theme.check.border}`
+      };
       textStyles = {
         textDecoration: 'none',
         color: theme.todo.font
       };
     }
+
+    textRef.current.style.setProperty(
+      '--placeholder-color',
+      theme.todo.placeholder
+    );
+    checkRef.current.style.setProperty('--check-background', checkBackground);
 
     Object.assign(checkRef.current.style, checkStyles);
     Object.assign(textRef.current.style, textStyles);
@@ -64,37 +71,43 @@ const TodoItem = ({
   const onTodoSubmit = e => {
     e.preventDefault();
 
-    // Reset AddTodo form elements
-    setText('');
-    setCompleted(false);
+    if (onNewTodo) {
+      // Reset AddTodo form elements
+      setText('');
+      setCompleted(false);
 
-    if (onNewTodo) onNewTodo({ text, completed });
+      onNewTodo({ text, completed });
+    }
   };
 
   return (
     <form
       className="todo-item"
-      style={{ background: theme.background }}
+      style={{ borderColor: theme.border }}
       onSubmit={onTodoSubmit}
     >
       <div
         ref={checkRef}
         className="todo-check"
         onClick={() => setCompleted(!completed)}
-      ></div>
+      >
+        <span></span>
+      </div>
       <div className="field ui transparent input">
         <input
           ref={textRef}
           className="todo-text"
           type="text"
-          placeholder="Create a new todo..."
+          placeholder={
+            onNewTodo ? 'Create a new todo...' : 'Type something to todo..'
+          }
           value={text}
           onChange={e => setText(e.target.value)}
         />
       </div>
       {onTodoChange ? (
         <div
-          className="todo-delete"
+          className="todo-delete one wide column"
           style={{
             background: 'url(/images/icon-cross.svg) no-repeat center / 50% 50%'
           }}

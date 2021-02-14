@@ -1,43 +1,218 @@
 .todo {
   font: 400 18px 'Josefin Sans', sans-serif;
   position: absolute;
-  top: 65px;
-  left: 31%;
-  width: 39%;
-
-  border: 2px solid #000;
+  top: 73px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 540px;
+  --todo-border-radius: 5px;
 }
 
-.todo-item {
-  transition: 0.3s ease-in-out;
+.todo-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 18px;
-  border-radius: 4px;
+  margin-bottom: 35px;
 }
 
-.todo-check {
-  transition: 0.2s ease-out;
+.todo-header h1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 2.8rem;
+  letter-spacing: 0.35em;
+  color: #fff;
+}
+
+.theme-switcher {
+  box-sizing: content-box;
+  padding: 8px;
+  padding-right: 0;
   width: 26px;
   height: 26px;
-  border: 1px solid;
-  border-radius: 50%;
-  margin-right: 25px;
-}
-
-.todo-check:hover {
   cursor: pointer;
 }
 
+.add-todo {
+  margin-bottom: 25px;
+}
+
+.add-todo,
+.container {
+  border-radius: var(--todo-border-radius);
+}
+
+.container.light {
+  transition: 0.3s ease-out;
+  box-shadow: -2px 0px 20px -10px hsl(236, 33%, 92%),
+    0px 50px 80px -35px hsl(233, 11%, 84%), 2px 0 20px -10px hsl(236, 33%, 92%);
+}
+
+.todo-list {
+  margin-bottom: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list .todo-item:first-child {
+  border-radius: var(--todo-border-radius) var(--todo-border-radius) 0 0;
+}
+
+.todo-item {
+  padding: 20px 0px;
+  border-bottom: 1px solid;
+  display: flex;
+  align-items: center;
+  position: relative;
+  caret-color: hsl(220, 98%, 61%);
+}
+
+.add-todo .todo-item {
+  border: none;
+}
+
+.todo-check {
+  --check-background: ;
+  border-radius: 50%;
+  padding: 1px !important;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 4%;
+}
+
+.todo-check span {
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.todo-check:hover {
+  transition: background 0.3s ease;
+  cursor: pointer;
+  background-image: linear-gradient(
+    120deg,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+  border: none !important;
+}
+
+.todo-check:hover span {
+  background: var(--check-background);
+}
+
+.field.ui.input {
+  left: 13%;
+  width: 75%;
+  transform: translateY(3px);
+}
+
 .todo-text {
+  --placeholder-color: hsl(236, 9%, 61%);
+  cursor: pointer;
   transition: 0.2s ease-in-out !important;
   font: inherit !important;
-  font-size: 20px !important;
-  --placeholder-color: hsl(236, 9%, 61%);
+  width: 100%;
 }
 
 ::placeholder {
-  text-decoration: none;
   color: var(--placeholder-color) !important;
-  /* opacity: 1; */
+  text-decoration: none;
+  opacity: 1;
+}
+
+.todo-delete {
+  display: none;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  right: 4%;
+}
+
+.todo-item:hover .todo-delete {
+  display: block;
+  animation: fade 0.4s;
+}
+
+@keyframes fade {
+  0% {
+    right: -100%;
+  }
+}
+
+.todo-controls.ui.menu {
+  margin: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 15px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.ui.menu::after {
+  content: none;
+}
+
+.todo-controls {
+  --filter-color: ;
+  --filter-hover: ;
+}
+
+.todo-controls .filters.ui.menu {
+  margin: 0;
+  font: inherit;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.filters.ui.menu span.item.link {
+  font-weight: 700;
+}
+
+.filters.ui.menu span.item.active {
+  color: hsl(220, 98%, 61%);
+}
+
+.todo-controls.ui.text.menu .item {
+  color: var(--filter-color);
+}
+
+.todo-controls.ui.text.menu .item.link:hover {
+  color: var(--filter-hover);
+}
+
+.todo-info {
+  transition: 0.3s ease;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.attribution {
+  font-size: 12px;
+  color: slateblue;
+}
+
+.attribution a {
+  color: inherit;
+}
+
+.attribution a:last-child {
+  color: blueviolet;
+}
+
+.attribution a:last-child:hover {
+  color: mediumvioletred;
 }

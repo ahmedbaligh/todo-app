@@ -3,7 +3,7 @@ import TodoItem from './TodoItem';
 
 export default function AddTodo({ theme, onNewTodo }) {
   return (
-    <div style={{ marginBottom: '25px' }}>
+    <div className="add-todo" style={{ backgroundColor: theme.background }}>
       <TodoItem theme={theme} onNewTodo={onNewTodo} />
     </div>
   );

@@ -71,8 +71,10 @@ class Todo extends React.Component {
     });
 
   onNewTodo = ({ text, completed }) => {
-    const lastID = this.state.todos ? this.state.todos.length : 0;
-    const id = lastID + 1;
+    // Generate unique random ids
+    // Idea: https://gist.github.com/gordonbrander/2230317
+    const id = '_' + Math.random().toString(36).substr(2, 9);
+
     const newTodo = { id, text, completed };
     this.setState(prevState => ({ todos: [...prevState.todos, newTodo] }));
   };
@@ -89,22 +91,29 @@ class Todo extends React.Component {
 
   render() {
     const { darkTheme, theme, onThemeChange } = this.props;
+    console.log(this.state.todos);
 
     return (
       <main className="todo">
         <TodoHeader darkTheme={darkTheme} onThemeChange={onThemeChange} />
         <AddTodo theme={theme} onNewTodo={this.onNewTodo} />
-        <TodoList
-          theme={theme}
-          todos={this.filteredTodos()}
-          onTodoChange={this.onTodoChange}
-          onTodoDelete={this.onTodoDelete}
-        />
-        <TodoControls
-          todosLeft={this.todosLeft()}
-          onFilter={this.onFilterChange}
-          onClearCompleted={this.onClearCompleted}
-        />
+        <div
+          className={darkTheme ? 'container' : 'light container'}
+          style={{ backgroundColor: theme.background }}
+        >
+          <TodoList
+            theme={theme}
+            todos={this.filteredTodos()}
+            onTodoChange={this.onTodoChange}
+            onTodoDelete={this.onTodoDelete}
+          />
+          <TodoControls
+            theme={theme}
+            todosLeft={this.todosLeft()}
+            onFilter={this.onFilterChange}
+            onClear={this.onClearCompleted}
+          />
+        </div>
         <p className="todo-info" style={{ color: theme.info }}>
           Drag and drop to reorder list
         </p>
