@@ -17,13 +17,15 @@ const TodoItem = ({
   const checkRef = useRef();
 
   useEffect(() => {
-    const timeoutID = setTimeout(
-      () => (text ? setDebouncedText(text) : setText(debouncedText)),
-      3000
-    );
+    if (onTodoChange) {
+      const timeoutID = setTimeout(
+        () => (text ? setDebouncedText(text) : setText(debouncedText)),
+        3000
+      );
 
-    return () => clearTimeout(timeoutID);
-  }, [text, debouncedText]);
+      return () => clearTimeout(timeoutID);
+    }
+  }, [text, debouncedText, onTodoChange]);
 
   useEffect(() => {
     let checkStyles, textStyles, checkBackground;
