@@ -81,11 +81,7 @@ const TodoItem = ({
   };
 
   return (
-    <form
-      className="todo-item"
-      style={{ borderColor: theme.border }}
-      onSubmit={onTodoSubmit}
-    >
+    <form className="todo-item" onSubmit={onTodoSubmit}>
       <div
         ref={checkRef}
         className="todo-check"

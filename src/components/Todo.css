@@ -65,9 +65,12 @@
   border-radius: var(--todo-border-radius) var(--todo-border-radius) 0 0;
 }
 
+.todo-item-container {
+  border-bottom: 1px solid;
+}
+
 .todo-item {
   padding: 20px 0px;
-  border-bottom: 1px solid;
   display: flex;
   align-items: center;
   position: relative;
