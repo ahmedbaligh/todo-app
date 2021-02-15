@@ -1,12 +1,16 @@
+/*    Todo App    */
+
 .todo {
   font: 400 18px 'Josefin Sans', sans-serif;
   position: absolute;
-  top: 73px;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  min-width: 540px;
+  width: 540px;
   --todo-border-radius: 5px;
 }
+
+/*      Todo Header     */
 
 .todo-header {
   display: flex;
@@ -26,12 +30,14 @@
 
 .theme-switcher {
   box-sizing: content-box;
-  padding: 8px;
+  padding: 5px;
   padding-right: 0;
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
+
+/*      Add Todo      */
 
 .add-todo {
   margin-bottom: 25px;
@@ -48,8 +54,9 @@
     0px 50px 80px -35px hsl(233, 11%, 84%), 2px 0 20px -10px hsl(236, 33%, 92%);
 }
 
+/*    Todo List     */
+
 .todo-list {
-  margin-bottom: 20px;
   padding: 0;
   margin: 0;
 }
@@ -144,6 +151,8 @@
   }
 }
 
+/*      Todo Controls      */
+
 .todo-controls.ui.menu {
   margin: 0;
   justify-content: space-between;
@@ -182,7 +191,7 @@
   color: var(--filter-color);
 }
 
-.todo-controls.ui.text.menu .item.link:hover {
+.todo-controls.ui.text.menu .item.link:not(.active):hover {
   color: var(--filter-hover);
 }
 
@@ -193,11 +202,13 @@
   margin-top: 50px;
 }
 
+/*     Page Footer     */
+
 footer {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
 }
 
 .attribution {
@@ -215,4 +226,97 @@ footer {
 
 .attribution a:last-child:hover {
   color: mediumvioletred;
+}
+
+/*      Mobile Responsiveness     */
+
+@media (max-width: 600px) {
+  .todo {
+    max-width: 87%;
+    top: 6%;
+    font-size: 12px;
+  }
+
+  /*      Todo Header     */
+
+  .todo-header {
+    margin-bottom: 30px;
+  }
+
+  .todo-header h1 {
+    font-size: 1.9rem;
+    letter-spacing: 0.4em;
+  }
+
+  .theme-switcher {
+    align-self: flex-start;
+    padding: 3px;
+    padding-right: 0;
+    width: 17px;
+    height: 17px;
+  }
+
+  /*    Todo List     */
+
+  .add-todo {
+    margin-bottom: 15px;
+  }
+
+  .todo-item {
+    padding: 17px 0px;
+  }
+
+  .todo-check {
+    width: 20px;
+    height: 20px;
+    left: 6%;
+  }
+
+  .field.ui.input {
+    left: 15%;
+  }
+
+  .todo-delete {
+    display: inline-block;
+    box-sizing: content-box;
+    padding: 3px;
+    width: 18px;
+    height: 18px;
+    right: 4%;
+    animation: fade 0.4s;
+  }
+
+  /*      Todo Controls      */
+
+  .todo-controls.ui.menu {
+    position: relative;
+    padding: 16px 12px;
+    font-size: 12px;
+    background: inherit;
+    border-radius: inherit;
+  }
+
+  .todo-controls .filters.ui.menu {
+    bottom: -60px;
+    width: 100%;
+    justify-content: center;
+    background: inherit;
+    font-size: 14px;
+    border-radius: var(--todo-border-radius);
+  }
+
+  .todo-controls .filters.ui.menu > * {
+    padding: 15px 10px;
+  }
+
+  .todo-info {
+    font-size: 14px;
+    padding: 50px 0 80px;
+  }
+
+  /*     Page Footer     */
+
+  footer {
+    opacity: 0.5;
+  }
 }

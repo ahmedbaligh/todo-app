@@ -7,7 +7,7 @@ const Header = ({ darkTheme }) => {
     <header role="banner">
       <picture>
         <source
-          media="(min-width: 600px)"
+          media="(min-width: 800px)"
           srcSet={`./images/bg-desktop-${theme}.jpg`}
         />
         <img

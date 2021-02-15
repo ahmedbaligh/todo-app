@@ -33,7 +33,7 @@ const TodoItem = ({
 
       checkStyles = {
         background:
-          'url(/images/icon-check.svg) no-repeat center / 47% 47%, linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))',
+          'url(/images/icon-check.svg) no-repeat center / 40% 40%, linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))',
         border: 'none'
       };
 

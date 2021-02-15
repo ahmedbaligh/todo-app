@@ -1,5 +1,4 @@
 import React from 'react';
-import './TodoHeader.css';
 
 const ThemeSwitcher = ({ darkTheme, onThemeChange }) => {
   const icon = darkTheme ? 'sun' : 'moon';
@@ -8,7 +7,7 @@ const ThemeSwitcher = ({ darkTheme, onThemeChange }) => {
     <div
       className="theme-switcher"
       style={{
-        background: `transparent url(/images/icon-${icon}.svg) no-repeat center`
+        background: `transparent url(/images/icon-${icon}.svg) no-repeat center / contain`
       }}
       onClick={onThemeChange}
     ></div>
